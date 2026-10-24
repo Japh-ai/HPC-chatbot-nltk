@@ -25,10 +25,11 @@ Build a rule-based chatbot that answers these frequent questions instantly, so u
 ### Architecture
 
 ```mermaid
-flowchart LR
-    user["User"]
+
+flowchart TB
+    user(["User"])
     ui["Interface<br/>(Google Colab / terminal)"]
-    kb[("Knowledge base<br/>data/intents.json")]
+    kb["Knowledge base<br/>data/intents.json"]
 
     subgraph bot["Chatbot"]
         pre["Preprocessing (NLTK)<br/>lowercase, tokenization,<br/>stopwords, stemming"]
@@ -43,11 +44,22 @@ flowchart LR
     kb -.->|"responses"| gen
     gen -->|"response"| ui
     ui --> user
+
+    classDef person fill:#DBEAFE,stroke:#2563EB,stroke-width:2px,color:#1E3A8A
+    classDef interface fill:#EDE9FE,stroke:#7C3AED,stroke-width:2px,color:#4C1D95
+    classDef module fill:#DCFCE7,stroke:#16A34A,stroke-width:2px,color:#14532D
+    classDef data fill:#FEF3C7,stroke:#D97706,stroke-width:2px,color:#78350F
+
+    class user person
+    class ui interface
+    class pre,engine,gen module
+    class kb data
 ```
 
 ### Conversation flow
 
 ```mermaid
+
 flowchart TD
     start([Start]) --> welcome["Bot shows welcome message"]
     welcome --> input[/"User types a message"/]
@@ -79,7 +91,7 @@ An intent's score is the share of the message's words that match its keywords. T
 HPC-chatbot-nltk/
 ├── data/intents.json            # knowledge base (11 intents)
 ├── notebooks/hpc_chatbot.ipynb  # Colab notebook: code, tests and analysis
-├── docs/architecture.md         # architecture and conversation flow diagrams
+├── architecture.mmd             # architecture diagram (Mermaid source)
 ├── main.py                      # command-line version of the chatbot
 └── requirements.txt
 ```
