@@ -2,6 +2,8 @@
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Japh-ai/HPC-chatbot-nltk/blob/main/notebooks/hpc_chatbot.ipynb)
 
+**This is an academic project.**
+
 A rule-based chatbot that answers frequently asked questions from users of a university HPC (High Performance Computing) cluster, built with Python and NLTK.
 
 ## Problem
