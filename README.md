@@ -22,12 +22,48 @@ Build a rule-based chatbot that answers these frequent questions instantly, so u
 
 ## How it works
 
+### Architecture
+
+```mermaid
+flowchart LR
+    user["User"]
+    ui["Interface<br/>(Google Colab / terminal)"]
+    kb[("Knowledge base<br/>data/intents.json")]
+
+    subgraph bot["Chatbot"]
+        pre["Preprocessing (NLTK)<br/>lowercase, tokenization,<br/>stopwords, stemming"]
+        engine["Rule engine<br/>intent detection"]
+        gen["Response generator"]
+        pre --> engine --> gen
+    end
+
+    user -->|"natural language question"| ui
+    ui --> pre
+    kb -.->|"patterns to keywords"| engine
+    kb -.->|"responses"| gen
+    gen -->|"response"| ui
+    ui --> user
 ```
-User message
-    → NLTK preprocessing (lowercase, tokenize, remove stopwords, stem)
-    → keyword matching against the knowledge base (data/intents.json)
-    → response (or a fallback if nothing matches)
+
+### Conversation flow
+
+```mermaid
+flowchart TD
+    start([Start]) --> welcome["Bot shows welcome message"]
+    welcome --> input[/"User types a message"/]
+    input --> isQuit{"Is the message quit or exit?"}
+    isQuit -->|Yes| finish(["Bot says goodbye and ends"])
+    isQuit -->|No| preprocess["Preprocess message with NLTK"]
+    preprocess --> score["Score every intent"]
+    score --> threshold{"Highest score ≥ 0.3?"}
+    threshold -->|Yes| pick["Pick a response from the detected intent"]
+    threshold -->|No| fallback["Fallback response:<br/>ask the user to rephrase"]
+    pick --> show["Show response"]
+    fallback --> show
+    show --> input
 ```
+
+### Knowledge base
 
 Each intent in [`data/intents.json`](data/intents.json) has:
 
@@ -43,6 +79,7 @@ An intent's score is the share of the message's words that match its keywords. T
 HPC-chatbot-nltk/
 ├── data/intents.json            # knowledge base (11 intents)
 ├── notebooks/hpc_chatbot.ipynb  # Colab notebook: code, tests and analysis
+├── docs/architecture.md         # architecture and conversation flow diagrams
 ├── main.py                      # command-line version of the chatbot
 └── requirements.txt
 ```
