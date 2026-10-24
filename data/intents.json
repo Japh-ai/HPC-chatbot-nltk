@@ -1,0 +1,108 @@
+{
+    "intents": [
+        {
+            "tag": "greeting",
+            "patterns": ["hi", "hello", "good morning"],
+            "responses": ["Hi! I'm the HPC cluster assistant. How can I help you?"]
+        },
+        {
+            "tag": "submit_job",
+            "patterns": [
+                "how do I submit a job",
+                "sbatch",
+                "run a script on the cluster"
+            ],
+            "responses": [
+                "Create a SLURM script and submit it with: sbatch my_script.sh"
+            ]
+        },
+        {
+            "tag": "get_help",
+            "patterns": [
+                "I need help",
+                "can you assist me",
+                "how do I get support"
+            ],
+            "responses": [
+                "You can contact the HPC support team at support@hpc.edu",
+                "Check the documentation at https://hpc.edu/docs for more information."
+            ]
+        },
+        {
+            "tag": "check_job_status",
+            "patterns": [
+                "how do I check my job status",
+                "squeue",
+                "is my job running"
+            ],
+            "responses": [
+                "Use the command: squeue -u your_username to check the status of your jobs."
+            ]
+        },
+        {
+            "tag": "cancel_job",
+            "patterns": [
+                "how do I cancel a job",
+                "scancel",
+                "stop my job"
+            ],
+            "responses": [
+                "Use the command: scancel job_id to cancel a specific job."
+            ]
+        },
+        {
+            "tag": "goodbye",
+            "patterns": ["bye", "goodbye", "see you later"],
+            "responses": ["Goodbye! If you have more questions, feel free to ask."]
+        },
+        {
+            "tag": "thanks",
+            "patterns": ["thanks", "thank you", "appreciate it"],
+            "responses": ["You're welcome! Happy to help."]
+        },        
+        {
+            "tag": "job_submission_error",
+            "patterns": [
+                "my job failed to submit",
+                "sbatch error",
+                "submission error"
+            ],
+            "responses": [
+                "Please check your SLURM script for errors and ensure you have the correct permissions."
+            ]
+        },
+        {
+            "tag": "module_load",
+            "patterns": [
+                "how do I load a module",
+                "module load",
+                "load software"
+            ],
+            "responses": [
+                "Use the command: module load module_name to load the desired software module."
+            ]
+        },
+        {
+            "tag": "module_list",
+            "patterns": [
+                "how do I see available modules",
+                "list modules",
+                "what software is available"
+            ],
+            "responses": [
+                "Use the command: module avail to see a list of available software modules."
+            ]
+        },
+        {
+            "tag": "connect_to_cluster",
+            "patterns": [
+                "how do I connect to the cluster",
+                "ssh to cluster",
+                "login to HPC"
+            ],
+            "responses": [
+                "You can connect to the HPC cluster using SSH: ssh username@cluster_address"
+            ]
+        }
+    ]
+}
